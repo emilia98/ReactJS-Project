@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/public/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/user.css" type="text/css" />
+  <script src="/public/scripts/jquery-3.3.1.js"></script>
+  <script src="/public/scripts/app.js"></script>
+</head>
+
+<body>
+  {{> navigation}}
+<main>
+<form method="POST" id="activate" action='/user/activate/{id}'>
+    <div class="container">
+      <h1>Activate</h1>
+      <hr>
+
+      <label for="username">
+        <b>Username</b>
+      </label>
+      <input type="text" placeholder="Enter Username" id="username" name="username" required>
+
+      <label for="password">
+        <b>Activation Code</b>
+      </label>
+      <input type="text" placeholder="Enter Activation code" id="activation-code" name="activationCode" required>
+
+
+      <button type="submit" id="user-interaction">Activate</button>
+    </div>
+  </form>
+
+</main>
+  
+</body>
+</html>

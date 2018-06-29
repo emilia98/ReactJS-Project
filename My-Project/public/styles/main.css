@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+div {
+  background: #000000;
+ 
+}
+
+div#main-menu nav {
+  background-color: black;
+  color: white;
+  display: inline-block;
+  padding: 1%;
+}
+
+#common {
+    float: left;
+    width: 70%;
+}
+
+#user-interactions {
+    width: 25%;
+    text-align: right;
+}
+
+ul {
+    padding: 0;
+}
+
+nav ul li{
+  list-style-type: none;
+  display: inline-block;
+  padding: 0.5%;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+nav#sub-menu ul{
+    padding-left: 0;
+    text-align: center;
+    background: #485654;
+    color: white;
+}
+
+#sub-menu li {
+
+}
+
+#sub-menu .icon {
+    color: #ffff32;
+}
+
+li.icon {
+  padding:0;
+  text-align: center;
+  color: green;
+}
+
+nav#user-interactions ul{
+   display: table;
+}
+
+nav#user-interactions li {
+    display: inline-table;
+    vertical-align: middle;
+    width: 30%;
+}
+
+nav#user-interactions button{
+    background-color: #a059e2;
+    border: none;
+    color: white;
+    padding: 10%;
+    font-size: 1.2em;
+    border-radius: 5%;
+}
+
+
+img {
+  width: 40%;
+  background-color: aliceblue;
+  border-radius: 50%;
+  float: right;
+}
+
+.pro {
+    background-color: #a059e2;
+    border: none;
+    color: white;
+    padding: 5px;
+    font-size: 0.9em;
+    border-radius: 5%;
+}
+
