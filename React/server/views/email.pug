@@ -1,0 +1,70 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  style.
+    #container {
+    font-family: sans-serif;
+    padding: 5%;
+    }
+    h1 {
+    text-align: center;
+    text-decoration: underline;
+    color: black;
+    }
+    p, .paragraph {
+    font-size: 1.2em;
+    padding: 0 5%;
+    margin: 2%;
+    }
+    h2 {
+    padding: 0;
+    display: inline-block;
+    }
+    a {
+    text-decoration: none;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    text-align: center;
+    }
+    .confirm {
+    text-align: center;
+    }
+    a.button {
+    padding: 1%;
+    border: none;
+    background-color: #FE6F45;
+    display: inline-block;
+    width: 50%;
+    font-size: 1.5em;
+    text-transform: none;
+    color: black;
+    margin: 2%;
+    }
+    #code {
+    font-size: 1.5em;
+    color: #d11089;
+    font-weight: bold;
+    margin: 2%;
+    }
+#container
+  h1  Confirmation email 
+  p
+    | It looks like you&apos;ve registered in My app. If you have registered there, 
+    b get the code and click on the button below 
+    | to confirm that
+    | you are the person, who want to use this app.
+  div.paragraph
+    h2  Activation Code:
+    span#code #{activationCode}
+  p.confirm
+    a.button(href='http://localhost:8080/user/activate/'+activationLink)
+      | Confirm
+  hr
+  p(style='padding: 0 5%;')
+    | If you have 
+    b not registered
+    |  in the application, please contact us on one of the methods shown 
+    a(href='http://localhost:8080/contacts') here
+    | .
