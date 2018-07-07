@@ -26,11 +26,13 @@ module.exports = (app) => {
     })
     .post(userController.registerPost);
 
+    /*
     app.route('/user/login')
-    .get((req, res) => {
+    /*.get((req, res) => {
         res.render('user/login');
     })
     .post(userController.loginPost);
+    */
 
     app.route('/user/activate/:id')
     .get((req, res) => {

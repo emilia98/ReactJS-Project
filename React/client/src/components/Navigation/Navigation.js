@@ -3,20 +3,25 @@ import './navigation.css';
 import MainMenu from './Main/MainMenu';
 // import '../../jquery-3.3.1.min.js';
 import $ from 'jquery';
+import UserMenu from './Main/UserMenu';
 
 export default class Navigation extends Component {
     constructor(props) {
         super(props);
 
-        console.log('construct');
+        // console.log('construct');
 
         this.state = {
-            responsive: ''
+            responsive: '',
+            userMenuVisible: false,
+            iconClicked: false
         };
 
         this.looksForResizing = this.looksForResizing.bind(this);
-       //this.subMenu = $('#sub-menu');
-       // this.mainMenu = $('#main-menu');
+        this.userItemClicked = this.userItemClicked.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+        //this.subMenu = $('#sub-menu');
+        // this.mainMenu = $('#main-menu');
     }
 
     looksForResizing(e) {
@@ -43,7 +48,7 @@ export default class Navigation extends Component {
             $('#sub-menu').insertBefore($('#main-menu'));
         }
         else {
-            console.log(this.state);
+            // console.log(this.state);
             this.setState({
                 responsive: 'responsive'
             });
@@ -51,15 +56,15 @@ export default class Navigation extends Component {
         //console.log($(this.state.subMenu));
         // console.log(window.i)
         // console.log('da');
-       window.addEventListener('resize', this.looksForResizing);
-        
+        window.addEventListener('resize', this.looksForResizing);
+
     }
 
-/*
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.looksForResizing);
-    }
-*/
+    /*
+        componentWillUnmount() {
+            window.removeEventListener('resize', this.looksForResizing);
+        }
+    */
     /*
     componentWillUpdate() {
         //console.log('here');
@@ -78,9 +83,37 @@ export default class Navigation extends Component {
     }
     */
 
+    /* componentDidMount() {
+
+    }*/
+    userItemClicked() {
+         // console.log('da');
+        this.setState({
+            userMenuVisible: true,
+            iconClicked: true
+        });
+
+        // console.log(this.state);
+    }
+
+    closeMenu() {
+        // console.log('closing');
+        this.setState({
+            userMenuVisible: false
+        });
+    }
+
+    
     render() {
         return (
-            <MainMenu responsiveClass={this.state.responsive}/>
+            <div>
+                <MainMenu
+                    responsiveClass={this.state.responsive}
+                    userItemClicked={this.userItemClicked}
+                />
+                <UserMenu closeMenu={this.closeMenu}
+                iconClicked={this.state.iconClicked} />
+            </div>
         )
     }
 }

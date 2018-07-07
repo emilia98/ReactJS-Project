@@ -7,6 +7,9 @@ const single = multer().single();
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
+require('./passport');
 //const upload = multer({dest: 'public/uploads'});
 
 const publicFiles = path.normalize(
@@ -17,6 +20,7 @@ const publicFiles = path.normalize(
 module.exports = (app, config) => {
   app.use('/public', express.static(publicFiles));
 
+  app.use(logger('dev'));
  app.use(cookieParser());
   app.use(session({
     secret: 's3cr3t',
@@ -25,6 +29,8 @@ module.exports = (app, config) => {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
+
+ 
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -36,4 +42,7 @@ module.exports = (app, config) => {
     partialsDir: 'views/partials'
   }));
   app.set('view engine', '.hbs');
+
+  const auth = require('../routes/auth');
+  app.use('/user', auth);
 };

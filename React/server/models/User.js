@@ -39,8 +39,8 @@ const userSchema = mongoose.Schema({
 
 userSchema.method({
     authenticate: function (enteredPassword) {
-        console.log('*'.repeat(20));
-        console.log(this);
+        // console.log('*'.repeat(20));
+        // console.log(this);
         let hashedPassword = encryption.generateHashedPassword(this.salt, enteredPassword);
 
         

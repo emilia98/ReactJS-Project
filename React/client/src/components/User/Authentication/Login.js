@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 
 
 
-class Register extends Component {
+class Login extends Component {
     constructor (props) {
         super(props);
 
@@ -32,23 +32,32 @@ class Register extends Component {
         const data = new FormData(event.target);
         // console.log(data);
 
-        let result = await fetch('http://localhost:8080/user/register', {
+        let result = await fetch('http://localhost:8080/user/login', {
             method: 'POST',
             body: data
         });
 
        result = await result.json();
+       console.log(result);
 
        this.setState({
            result: result,
            errors: result.errors
        });
 
+       if (result.token) {
+           localStorage.setItem('user', JSON.stringify({
+               user: result.user,
+               token: result.token
+           }));
+       }
+
        // console.log(this.state);
     };
 
 
     returnError (inputField) {
+        console.log(this.state);
         return this.state.errors[inputField] !== undefined
     }
 
@@ -60,7 +69,7 @@ class Register extends Component {
         return (
             <div id="auth-container">
                 <form id="authenticate" onSubmit={this.onFormSubmitted}>
-                    <FormTitle title = "Register" />
+                    <FormTitle title = "Login" />
 
                     <InputData
                     id="username" 
@@ -70,14 +79,6 @@ class Register extends Component {
                     hasError={this.returnError('username')}/>
                     <Validation message={this.state.errors.username} />
                     <InputData 
-                    id="email" 
-                    inputType="email" 
-                    label="Email" 
-                    name="email"
-                    hasError={this.returnError('email')}
-                    />
-                    <Validation message={this.state.errors.email} />
-                    <InputData 
                     id="password" 
                     inputType="password" 
                     label="Password" 
@@ -85,14 +86,6 @@ class Register extends Component {
                     hasError={this.returnError('password')}
                     />
                     <Validation message={this.state.errors.password} />
-                    <InputData 
-                    id="repeat" 
-                    inputType="password" 
-                    label="Repeat Password" 
-                    name="repeat"
-                    hasError={this.returnError('repeat')}
-                    />
-                    <Validation message={this.state.errors.repeat} />
 
                     <Buttons />
                    
@@ -104,4 +97,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default Login;

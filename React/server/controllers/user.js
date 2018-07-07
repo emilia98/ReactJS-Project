@@ -4,12 +4,14 @@ const sendEmail = require('../utilities/send_email_2');
 const encryption = require('../utilities/encryption');
 const voucherCodes = require('../utilities/voucher_codes');
 const shortid = require('short-id');
+// const passportTokens = require('passport-jwt');
+const jwt = require('jsonwebtoken');
 
 
+
+// const passport = require('passport');
 
 module.exports.registerPost = async (req, res) => {
-  console.log('HERE');
-  console.log(req.body);
   let username = req.body.username;
   let password = req.body.password;
   let repeat = req.body.repeat;
@@ -108,27 +110,71 @@ module.exports.registerPost = async (req, res) => {
 
 
 module.exports.loginPost = async (req, res) => {
+  //  console.log(req.body);
   let username = req.body.username;
   let password = req.body.password;
 
   let user = await User.findOne({username: username});
+  // console.log()
+  let result = {};
+  result.errors = {};
+  result.success = null;
+  result.token = null;
+  result.user = null;
 
   if (!user) {
-    res.status(402).json('Incorrect username!');
+    result.errors.username = 'This user does not exist!';
+    res.status(402).json(result);
     return;
+    /* console.log('username');
+    res.status(402).json('Incorrect username!');
+    */
+    //return;
   }
 
   if (!user.authenticate(password)) {
-    res.status(402).json('Incorrect password!');
+    result.errors.password = 'Incorrect password!';
+    res.status(402).json(result);
     return;
+    /*
+    console.log('password');
+    res.status(402).json('Incorrect password!');
+    */
+    //return;
   }
 
-  req.login(user, (error, user) => {
+  // console.log(result);
+  /* if (Object.keys(result.errors).length > 0) {
+    res.status(402).json(result.errors);
+    return;
+  } */
+
+
+  req.login(user, {session: false}, (error) => {
     if (error) {
       res.status(402).json('Authentication is unsuccessful!');
       return;
     }
+    
+     console.log(user);
+    let userData = {
+      username: user.username,
+      profilePicture: 'https://4.bp.blogspot.com/-L9CtV6gR8GI/WtgKA619aEI/AAAAAAAAF9c/CubtyZE94o076qCShJN_D2bdNiHoeIRxACEwYBhgL/s1600/cool%2Bprofile%2Bimages.png'
+    };
+    const token = jwt.sign(userData, 'my_react_app', {
+      expiresIn: '30d'
+    });
+    console.log(token);
+
+    result.user = userData;
+    result.token = token;
+    
+    return res.json(result);
+    /*
+    const token = jwt.sign(user, 'your_jwt_secret');
+           return res.json({user, token});
     res.json('Logged in!');
+    */
   });
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Register from './components/User/Authentication/Register';
+import Login from './components/User/Authentication/Login';
 import Navigation from './components/Navigation/Navigation';
 import { Route } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ class App extends Component {
       <div>
       <Navigation />
       <Route path='/user/register' component={Register} />
+      <Route path='/user/login' component={Login} />
       
       </div>
     );

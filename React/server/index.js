@@ -12,9 +12,10 @@ const environment = process.env.NODE_ENV || 'development';
 
 app.use(cors());
 database(config[environment]);
+passportConfig();
 expressConfig(app, config[environment]);
 routes(app);
-passportConfig();
+
 
 
 app.listen(port, () => {
