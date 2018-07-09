@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 require('./passport');
+require('../config/auth');
 //const upload = multer({dest: 'public/uploads'});
 
 const publicFiles = path.normalize(
@@ -44,5 +45,10 @@ module.exports = (app, config) => {
   app.set('view engine', '.hbs');
 
   const auth = require('../routes/auth');
+  const visited = require('../controllers/user/visited');
+  const authMiddleware = require('../middlewares/authentication');
+
   app.use('/user', auth);
+  // app.use('')
+  app.use('/visited', authMiddleware.isAuthenticated, visited);
 };

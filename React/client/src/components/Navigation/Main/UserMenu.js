@@ -112,13 +112,13 @@ let classes = this.state.isOpened === true ? 'opened' : '';
                         </a>
                       </div>
                     </li><li>
-                        <div className="social-login facebook">
+                        <div className="nav-social-login facebook">
                                     <p>
                                            <a href="#">Login with <i className="fa fa-facebook" aria-hidden="true"></i></a>
                                     </p>
                         </div>
                     </li><li>
-                     <div className="social-login google">
+                     <div className="nav-social-login google">
                          <p>
                                 <a href="#">Login with <i className="fa fa-google-plus" aria-hidden="true"></i></a>
                          </p>

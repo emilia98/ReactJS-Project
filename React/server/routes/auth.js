@@ -15,7 +15,9 @@ router.post('/login', function (req, res, next) {
     result.user = null;
 
 
-    console.log(user);
+   // console.log(req.body);
+
+   // console.log(user);
     if (err) {
       // console.log('here');
       res.status(402).json('Authentication is unsuccessful!');
@@ -35,15 +37,6 @@ router.post('/login', function (req, res, next) {
       res.status(402).json(result);
       return;
     }
-    /*
-    if (!user) {
-      // console.log(`username = ${username}`);
-     
-    }
-*/
-    /*
-   
-*/
 
     req.login(user, { session: false }, (error) => {
       if (error) {
@@ -55,6 +48,7 @@ router.post('/login', function (req, res, next) {
       // console.log(user);
 
       let userData = {
+        userId: user._id,
         username: user.username,
         profilePicture: 'https://4.bp.blogspot.com/-L9CtV6gR8GI/WtgKA619aEI/AAAAAAAAF9c/CubtyZE94o076qCShJN_D2bdNiHoeIRxACEwYBhgL/s1600/cool%2Bprofile%2Bimages.png'
       };
@@ -64,6 +58,13 @@ router.post('/login', function (req, res, next) {
 
       result.user = userData;
       result.token = token;
+
+      console.log(token);
+      /* res.cookie('user', {
+        token: token,
+        user: userData
+      });*/
+      // console.log(token);
 
       return res.json(result);
     });

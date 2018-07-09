@@ -4,6 +4,7 @@ import './App.css';
 import Register from './components/User/Authentication/Register';
 import Login from './components/User/Authentication/Login';
 import Navigation from './components/Navigation/Navigation';
+import Map from './components/Country/Map';
 import { Route } from 'react-router-dom';
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
       <Navigation />
       <Route path='/user/register' component={Register} />
       <Route path='/user/login' component={Login} />
-      
+      <Route path='/country' component={Map} />
       </div>
     );
   }

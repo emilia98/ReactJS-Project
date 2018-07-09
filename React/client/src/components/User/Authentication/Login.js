@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import FormTitle from './common/FormTitle';
 import InputData from './common/InputData';
 import Buttons from './common/Buttons';
@@ -32,14 +33,68 @@ class Login extends Component {
         const data = new FormData(event.target);
         // console.log(data);
 
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+
+        // console.log(headers);
+        /*
+        var headers = new Headers();
+headers.append('Content-Type', 'application/json');
+headers.append('Accept', 'application/json');
+        */
+       
         let result = await fetch('http://localhost:8080/user/login', {
             method: 'POST',
-            body: data
+            
+             // mode: "cors",
+           
+             // credentials: 'include',
+             
+             /*headers: {
+                 'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+                 'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded'
+             }*,*/
+             body: data
+             //headers
         });
 
        result = await result.json();
        console.log(result);
+       
 
+       // console.log(data);
+       /*
+      let result = await axios('http://localhost:8080/user/login', {
+        method: 'POST',
+        
+         // mode: "cors",
+        // withCredentials: true,
+         // credentials: 'include',
+         /* headers: {
+             'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+      },
+         body: JSON.stringify(data)
+         //headers
+    });
+
+*/
+    // result =await result.json();
+    // console.log();
+
+    /*
+
+      let result = await axios("http://mysite.com/api/things/", {
+        method: "post",
+        data: someJsonData,
+        withCredentials: true
+      })
+*/
        this.setState({
            result: result,
            errors: result.errors

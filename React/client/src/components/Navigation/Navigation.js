@@ -27,7 +27,6 @@ export default class Navigation extends Component {
     looksForResizing(e) {
         let width = e.target.innerWidth;
 
-        // console.log(this.state);
         if (width < 700) {
             this.setState({
                 responsive: 'responsive'
