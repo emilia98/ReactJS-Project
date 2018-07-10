@@ -4,17 +4,25 @@ const expressConfig = require('./config/express');
 const routes = require('./routes/routes');
 const database = require('./config/database');
 const passportConfig = require('./config/passport');
+const Google = require('./config/passport-strategies/google-auth');
 const cors = require('cors');
 
+const passport = require('passport');
 const app = express();
 const port = 8080;
 const environment = process.env.NODE_ENV || 'development';
 
 app.use(cors());
+
+
 database(config[environment]);
+Google();
 passportConfig();
+// console.log('1');
 expressConfig(app, config[environment]);
+// console.log('2');
 routes(app);
+
 
 
 

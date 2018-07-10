@@ -34,13 +34,16 @@ const userSchema = mongoose.Schema({
           values: ['Admin', 'User']
         },
         default: 'User'
+    },
+    profileId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Profile',
+        default: null
     }
 });
 
 userSchema.method({
     authenticate: function (enteredPassword) {
-        // console.log('*'.repeat(20));
-        // console.log(this);
         let hashedPassword = encryption.generateHashedPassword(this.salt, enteredPassword);
 
         

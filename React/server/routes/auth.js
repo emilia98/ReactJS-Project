@@ -3,10 +3,33 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 
+
+router.get('/google', // (req, res) => {
+  // res.send('Google');
+  // console.log('yhereee');
+ // console.log(req.url);
+ passport.authenticate('google', {
+  scope: ['email']
+})
+
+  // passport.authenticate('google', { scope: ['profile'] }));
+//}
+);
+
+router.get('/google/login', passport.authenticate('google'), (req, res) => {
+  // console.log('dabne');
+  //console.log(req.user);
+  // res.send('Logeed');
+  res.status(200).json({
+    message: 'Tochno e!'
+  });
+});
+
 router.post('/login', function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
 
+  // console.log('fuck be');
   passport.authenticate('local', { session: false }, (err, user) => {
     let result = {};
     result.errors = {};

@@ -4,7 +4,7 @@ const extractJWT = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 const User = require('./../models/User');
 
-console.log('daada');
+// console.log('daada');
 passport.use(new JWTStrategy({
   jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'my_react_app'

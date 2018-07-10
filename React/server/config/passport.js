@@ -3,6 +3,7 @@ const LocalPassport = require('passport-local');
 const User = require('../models/User');
 
 module.exports = () => {
+    console.log('local');
     passport.use(new LocalPassport(async (username, password, done) => {
         let user;
         

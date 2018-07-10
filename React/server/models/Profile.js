@@ -4,7 +4,21 @@ mongoose.Promise = global.Promise;
 const profileSchema = mongoose.Schema({
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+      ref: 'User',
+      required: true,
+      default: null
+    },
+    userGoogleId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserGoogle',
+        required: true,
+        default: null
+    },
+    userFacebookId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserFacebook',
+        required: true,
+        default: null
     },
     firstName: {
       type: String
@@ -17,11 +31,12 @@ const profileSchema = mongoose.Schema({
     },
     Country: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        ref: 'Country'
+        // required: true
     },
     Town: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId
+        // required: true
     },
     isPro: {
         type: Boolean,
