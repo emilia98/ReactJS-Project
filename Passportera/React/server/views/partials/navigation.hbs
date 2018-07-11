@@ -1,0 +1,93 @@
+<nav id="sub-menu">
+    <ul>
+        <li>About the Project</li>
+        <li class="icon">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+        <li>Blog</li>
+        <li class="icon">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+        <li>FAQ</li>
+        <li class="icon">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </li>
+        <li>Pricing</li>
+    </ul>
+</nav>
+<div id="main-menu">
+
+    <nav id="common">
+        <ul>
+            <li>
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </li>
+            <li class="icon">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </li>
+            <li>Countries</li>
+            <li class="icon">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </li>
+            <li>Cities</li>
+            <li class="icon">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </li>
+            <li>Destinations</li>
+            <li class="icon">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </li>
+            <li>
+                Traveler' Guide
+                <span class='pro'>Pro</span>
+            </li>
+        </ul>
+    </nav>
+
+
+    <nav id="user-interactions">
+        <ul>
+            {{#if hasUser}}
+
+            <li>
+                <a href="/go/pro">
+                    <button>
+                        Go Pro
+                    </button>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="{{picture}}" />
+                </a>
+            </li>
+
+
+
+            {{else}}
+            <li>
+                <a href="/user/login">
+                    <button>
+                        Login
+                    </button>
+                </a>
+            </li>
+            <li>
+                <a href="/user/register">
+                    <button>
+                        Register
+                    </button>
+                </a>
+            </li>
+
+            {{/if}}
+        </ul>
+    </nav>
+</div>
