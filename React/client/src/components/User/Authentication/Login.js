@@ -44,7 +44,7 @@ headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
         */
        
-        let result = await fetch('http://localhost:8080/user/login', {
+        let result = await fetch('http://localhost:8080/auth/login', {
             method: 'POST',
             
              // mode: "cors",

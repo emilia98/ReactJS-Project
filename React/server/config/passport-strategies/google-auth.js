@@ -1,10 +1,25 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GoogleKeys = require('../keys').googlePlus;
+const Keys = require('../keys');
 const UserGoogle = require('../../models/User_Google');
 const User = require('../../models/User');
+const JWT = require('jsonwebtoken');
 
+/*
+function generateToken (payload) {
+  let token = JWT.sign(
+    payload,
+    Keys.token.secretKey,
+    {
+      expiresIn: '3d'
+    }
+  )
+}
+
+*/
 module.exports = () => {
+
   /*
   passport.serializeUser((user, done) => {
     console.log(user);
@@ -23,9 +38,12 @@ module.exports = () => {
       callbackURL: '/auth/google/login'
     },
     async (accessToken, refreshToken, profile, callback) => {
-      
+      // console.log(profile);
       let user = await UserGoogle.findOne({googleId: profile.id});
+      console.log('Stored');
 
+       
+      // window.close();
       let createUser = null;
       if (!user) {
         createUser = await new UserGoogle({
@@ -36,10 +54,15 @@ module.exports = () => {
 
         let newGoogleUser = await UserGoogle.create(createUser);
 
+
+        //TODO:
+        // Set tokens in here   
         callback(null, newGoogleUser);
       } else {
         callback(null, user);
       }
+
+
     })
   );
 };

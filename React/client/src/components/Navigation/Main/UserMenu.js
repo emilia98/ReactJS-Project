@@ -1,4 +1,5 @@
 import React,  { Component } from 'react';
+import axios from 'axios';
 
 class UserMenu extends Component {
    constructor(props) {
@@ -7,7 +8,7 @@ class UserMenu extends Component {
      // this.menuClicked = this.menuClicked.bind(this);
      this.setWrapperRef = this.setWrapperRef.bind(this);
      this.handleClickOutside = this.handleClickOutside.bind(this);
-
+     this.googleLoginClicked = this.googleLoginClicked.bind(this);
     
      this.state = {
        isOpened: false,
@@ -31,6 +32,27 @@ class UserMenu extends Component {
      this.wrapper = node;
    }
 
+   async googleLoginClicked(e) {
+     
+     e.preventDefault();
+
+     console.log(e.target);
+     console.log('da')
+    
+     window.open('http://localhost:8080/auth/google', '_blank');
+;     
+     let result = await fetch('http://localhost:8080/auth/google', {
+       // method: 'POST'
+      
+     });
+     
+      result = await result.json();
+     console.log(result);
+
+
+     // console.log(e.target);
+     
+   }
   
    
    handleClickOutside(event) {
@@ -95,6 +117,7 @@ let classes = this.state.isOpened === true ? 'opened' : '';
                         <i className="fa fa-2x fa-times" aria-hidden="true"></i>
                     </span>
                   <ul> 
+                    <button onClick={this.googleLoginClicked}>Clicke me</button>
                     <li>
                       <div className="authenticate">
                         <a href="/user/register">
@@ -112,13 +135,15 @@ let classes = this.state.isOpened === true ? 'opened' : '';
                         </a>
                       </div>
                     </li><li>
+                        <a href="/auth/google">
                         <div className="nav-social-login facebook">
                                     <p>
-                                           <a href="#">Login with <i className="fa fa-facebook" aria-hidden="true"></i></a>
+                                           Login with <i className="fa fa-facebook" aria-hidden="true"></i>
                                     </p>
                         </div>
+                        </a>
                     </li><li>
-                     <div className="nav-social-login google">
+                     <div className="nav-social-login google" onClick={this.googleLoginClicked}>
                          <p>
                                 <a href="#">Login with <i className="fa fa-google-plus" aria-hidden="true"></i></a>
                          </p>

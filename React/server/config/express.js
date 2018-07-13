@@ -10,32 +10,29 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const GoogleStrategy = require('./passport-strategies/google-auth');
 
-
 require('./passport');
 require('./passport-strategies/google-auth');
-require('../config/auth');
+require('../config/tokens');
 
 const publicFiles = path.normalize(
   path.join(__dirname, '../public')
 );
-
 
 module.exports = (app, config) => {
   app.use('/public', express.static(publicFiles));
 
   app.use(logger('dev'));
   app.use(cookieParser());
-  /*
+  
   app.use(session({
     secret: 's3cr3t',
     saveUninitialized: false,
     resave: false
-  })); */
+  })); 
   // console.log('passof');
   app.use(passport.initialize());
-  // app.use(passport.session());
+  app.use(passport.session());
 
-  // console.log('passof');
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(single);
@@ -53,12 +50,7 @@ module.exports = (app, config) => {
   const authMiddleware = require('../middlewares/authentication');
 
 
-// console.log('shit');
   app.use('/auth', auth);
-  // app.use('')
-
-  
-
   app.use('/visited', authMiddleware.isAuthenticated, visited);
   
   app.get('/logout', function (req, res){

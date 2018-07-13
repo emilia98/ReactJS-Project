@@ -4,7 +4,6 @@ const extractJWT = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 const User = require('./../models/User');
 
-// console.log('daada');
 passport.use(new JWTStrategy({
   jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'my_react_app'
@@ -13,10 +12,10 @@ passport.use(new JWTStrategy({
 async function (tokenPayload, callback) {
   let userFound;
 
+  console.log('TOKENS');
   // console.log("TEHEEEEE");
   try {
     userFound = await User.findOne({username: tokenPayload.username});
-    // console.log(userFound);
 
     if (userFound) {
       return callback(null, userFound);

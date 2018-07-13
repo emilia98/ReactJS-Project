@@ -3,7 +3,7 @@ const LocalPassport = require('passport-local');
 const User = require('../models/User');
 
 module.exports = () => {
-    console.log('local');
+    // console.log('local');
     passport.use(new LocalPassport(async (username, password, done) => {
         let user;
         
@@ -28,6 +28,7 @@ module.exports = () => {
     }));
 
     passport.serializeUser((user, done) => {
+        // console.log(user);
         if (user) {
             return done(null, user._id);
         }

@@ -4,26 +4,67 @@ const jwt = require('jsonwebtoken');
 const passport = require("passport");
 
 
-router.get('/google', // (req, res) => {
-  // res.send('Google');
-  // console.log('yhereee');
- // console.log(req.url);
- passport.authenticate('google', {
-  scope: ['email']
-})
+router.get('/google', //(req,res) => {
+  passport.authenticate('google', {
+    scope: ['email'],
+    prompt: 'select_account'
+  })
+  
+)
 
-  // passport.authenticate('google', { scope: ['profile'] }));
-//}
-);
+// ORIGINAL
+/*
+router.get('/google', function(req, res) {
 
-router.get('/google/login', passport.authenticate('google'), (req, res) => {
-  // console.log('dabne');
-  //console.log(req.user);
-  // res.send('Logeed');
-  res.status(200).json({
-    message: 'Tochno e!'
-  });
+  passport.authenticate('google', {
+    scope: ['email'],
+    prompt: 'select_account'
+  }, function (err, profile, info) {
+    res.json({
+      'da': 'da'
+    })
+  })(req, res)
+
+}
+  */
+ 
+
+
+
+router.get('/google/login', function (req, res) {
+  passport.authenticate('google', function (err, profile, info) {
+   // console.log(profile);
+    
+    // req.session.user =profile;
+    // res.redirect('/auth/google');
+  })(req, res);
 });
+
+/*
+router.get('/google/login', // (req, res) => {
+  // console.log('da');
+  // passport.authenticate('google')
+  
+  passport.authenticate('google', function(err, user, info) {
+    console.log(user);
+    console.log('passed');
+    res.status(200).json({
+    message: 'Logged in'
+    });
+  })
+  
+)
+*/
+/*
+  passport.authenticate('google'), (req, res) => {
+    res.status(200).json({
+      message: 'Tochno e!'
+    });
+  }
+*/
+  
+
+
 
 router.post('/login', function (req, res, next) {
   let username = req.body.username;
