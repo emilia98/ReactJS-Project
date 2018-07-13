@@ -1,31 +1,79 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './styles/admin.css';
 import Register from './components/User/Authentication/Register';
 import Login from './components/User/Authentication/Login';
 import Navigation from './components/Navigation/Navigation';
 import Map from './components/Country/Map';
-import { Route } from 'react-router-dom';
+
+import Profile from './components/User/Profile/Profile';
+
+import Admin from './components/Admin/Admin';
+import { Redirect } from 'react-router-dom';
+import { Route } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 
+// import Test from './components/Test';
 class App extends Component {
-  componentDidMount() {
-    //console.log(this.props);
-     this.props.fetchUser();
+  constructor (props) {
+    super(props);
+
+    this.restrictAuthContent = this.restrictAuthContent.bind(this);
+    this.restrictAdminContent = this.restrictAdminContent.bind(this);
+    // this.renderThis = this.renderThis.bind(this);
   }
 
-  render() {
+  componentDidMount () {
+    // console.log(this.props);
+    this.props.fetchUser();
+    this.props.administrate();
+  }
+
+  restrictAuthContent (path, component) {
+    return <Route path={path} exact
+      render={() => this.props.auth ? (<Redirect to='/' />) : (component)} /> 
+  }
+
+  restrictAdminContent (path, component) {
+   // let isAdmin = this.props.admin !== null && this.props.admin.isAdmin;
+    // console.log(this.props.admin);
+
+    let isAdmin = this.props.admin;
+    //console.log(isAdmin);
+    if (isAdmin !== null) {
+      //console.log(isAdmin);
+      return <Route path={path} exact
+        render={() => isAdmin ? (component) : (<Redirect to='/' />)}/> 
+    }
+   
+    // console.log(this.props.admin);
+  }
+
+  render () {
+    
+    // this.restiricAdminContent();
+    
     return (
       <div>
+        <Navigation />
         
-      <Navigation />
-      <Route path='/user/register' component={Register} />
-      <Route path='/user/login' component={Login} />
-      <Route path='/country' component={Map} />
+        <Route path='/country' exact component={Map} />
+        {this.restrictAuthContent('/user/login', <Login />)}
+        {this.restrictAuthContent('/user/register', <Register />)}
+        {this.restrictAdminContent('/admin', <Admin />)}
       </div>
     );
   }
 }
-//<Register/>
-export default connect(null, actions)(App);
+
+function mapStateToProps (state) {
+  // console.log(state);
+  return {auth: state.auth, admin: state.admin};
+}
+
+export default connect(mapStateToProps, actions)(App);
+
+/**
+ * 
+ */

@@ -39,7 +39,7 @@ headers.append('Accept', 'application/json');
         let result = await fetch('http://localhost:8080/auth/login', {
             method: 'POST',
             
-             // mode: "cors",
+             // mode: 'cors',
            
              // credentials: 'include',
              
@@ -56,13 +56,14 @@ headers.append('Accept', 'application/json');
        result = await result.json();
        //console.log(result);
        
+       console.log(result);
 
        // console.log(data);
        /*
       let result = await axios('http://localhost:8080/user/login', {
         method: 'POST',
         
-         // mode: "cors",
+         // mode: 'cors',
         // withCredentials: true,
          // credentials: 'include',
          /* headers: {
@@ -81,8 +82,8 @@ headers.append('Accept', 'application/json');
 
     /*
 
-      let result = await axios("http://mysite.com/api/things/", {
-        method: "post",
+      let result = await axios('http://mysite.com/api/things/', {
+        method: 'post',
         data: someJsonData,
         withCredentials: true
       })
@@ -100,12 +101,15 @@ headers.append('Accept', 'application/json');
            localStorage.setItem('token', result.token);
        }
 
+
+
        // console.log(this.state);
     };
 
 
     returnError (inputField) {
         //console.log(this.state);
+        console.log('*'.repeat(20));
         return this.state.errors[inputField] !== undefined
     }
 
@@ -115,22 +119,22 @@ headers.append('Accept', 'application/json');
         }
 
         return (
-            <div id="auth-container">
-                <form id="authenticate" onSubmit={this.onFormSubmitted}>
-                    <FormTitle title = "Login" />
+            <div id='auth-container'>
+                <form id='authenticate' onSubmit={this.onFormSubmitted}>
+                    <FormTitle title = 'Login' />
 
                     <InputData
-                    id="username" 
-                    inputType="text" 
-                    label="Username" 
-                    name="username" 
+                    id='username' 
+                    inputType='text' 
+                    label='Username' 
+                    name='username' 
                     hasError={this.returnError('username')}/>
                     <Validation message={this.state.errors.username} />
                     <InputData 
-                    id="password" 
-                    inputType="password" 
-                    label="Password" 
-                    name="password"
+                    id='password' 
+                    inputType='password' 
+                    label='Password' 
+                    name='password'
                     hasError={this.returnError('password')}
                     />
                     <Validation message={this.state.errors.password} />

@@ -7,11 +7,14 @@ module.exports = () => {
     passport.use(new LocalPassport(async (username, password, done) => {
         let user;
         
+        console.log('here');
+        // console.log('Username = ' + username);
         // console.log('WRONG PLACE');
         try {
             user = await User.findOne({username: username});
         } catch (err) {
-            return done(null, false);
+            console.log(err);
+            return done(null, 'dadadadad');
         }
 
         if (!user) {
@@ -22,7 +25,7 @@ module.exports = () => {
 
         // console.log('shit');
         if(!user.authenticate(password)) {
-            return done(null,  { password: null });
+            return done(null, { password: null });
         }
 
         return done(null, user);

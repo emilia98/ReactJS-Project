@@ -114,6 +114,8 @@ module.exports.loginPost = async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
+  console.log('Username: ' + username);
+
   let user = await User.findOne({username: username});
   // console.log()
   let result = {};

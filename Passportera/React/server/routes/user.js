@@ -13,6 +13,21 @@ router.get('/here',  (req, res) =>
     })(req, res)
 );
 
+router.get('/roles', (req, res) => {
+    
+    passport.authenticate('jwt', {session: false}, (err, user, info) => {
+        // console.log(user);
+        if (user) {
+          return res.json({isAdmin: user.role === 'Admin'});
+        } 
+
+        return res.json(false);
+    })(req, res)
+    
+
+    // res.redirect('/');
+});
+
 router.get('/profile/me', isAuthenticated, (req, res) => {
     //console.log(req.url);
     // console.log(req.user);

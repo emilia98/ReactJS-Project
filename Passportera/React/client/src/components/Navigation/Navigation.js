@@ -3,7 +3,7 @@ import './navigation.css';
 import MainMenu from './Main/MainMenu';
 // import '../../jquery-3.3.1.min.js';
 import $ from 'jquery';
-import UserMenu from './Main/UserMenu';
+import UserMenu from './User/UserMenu';
 
 export default class Navigation extends Component {
     constructor(props) {

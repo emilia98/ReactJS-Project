@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const validations = require('./validations/country');
-
 mongoose.Promise = global.Promise;
 
-const countrySchema = mongoose.Schema({
-    name: {
-        type: String,
-        validate: validations.name
+const countryInfoSchema = mongoose.Schema({
+    countryId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true
     },
     abbreviatedName: {
         type: String,
@@ -29,6 +28,6 @@ const countrySchema = mongoose.Schema({
     }
 });
 
-let Country = mongoose.model('Country', countrySchema);
+const CountryInfo = mongoose.model('CountryInfo', countryInfoSchema);
 
-module.exports = Country;
+module.exports = CountryInfo;

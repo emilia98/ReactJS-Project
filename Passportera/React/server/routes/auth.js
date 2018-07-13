@@ -31,14 +31,12 @@ router.get('/google', function(req, res) {
 
 
 
-router.get('/google/login', function (req, res) {
-  passport.authenticate('google', function (err, profile, info) {
-   // console.log(profile);
-    
-    // req.session.user =profile;
-    // res.redirect('/auth/google');
-  })(req, res);
-});
+router.get('/google/login',
+  passport.authenticate('google'),
+  (req, res) => {
+    res.redirect('/user/profile/me');
+  }
+);
 
 /*
 router.get('/google/login', // (req, res) => {
@@ -70,7 +68,7 @@ router.post('/login', function (req, res, next) {
   let username = req.body.username;
   let password = req.body.password;
 
-  // console.log('fuck be');
+   // console.log('fuck be');
   passport.authenticate('local', { session: false }, (err, user) => {
     let result = {};
     result.errors = {};
@@ -78,6 +76,7 @@ router.post('/login', function (req, res, next) {
     result.token = null;
     result.user = null;
 
+    console.log(user);
 
    // console.log(req.body);
 
@@ -118,7 +117,7 @@ router.post('/login', function (req, res, next) {
       const token = jwt.sign({
         userId: user._id
       }, 'my_react_app', {
-        expiresIn: '30d'
+        expiresIn: '3d'
       });
 
       result.user = userData;

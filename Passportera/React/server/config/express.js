@@ -33,7 +33,7 @@ module.exports = (app, config) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use(single);
   
@@ -48,13 +48,14 @@ module.exports = (app, config) => {
   const auth = require('../routes/auth');
   const user = require('../routes/user');
   const visited = require('../controllers/user/visited');
+  const admin = require('../routes/admin');
   const authMiddleware = require('../middlewares/authentication');
 
 
   app.use('/auth', auth);
   app.use('/user', user);
   app.use('/visited', authMiddleware.isAuthenticated, visited);
-
+  app.use('/admin', admin);
  
   
 
