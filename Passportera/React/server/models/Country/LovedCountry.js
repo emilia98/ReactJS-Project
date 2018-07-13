@@ -23,6 +23,6 @@ const lovedCountrySchema = mongoose.Schema({
   }]
 });
 
-const LovedCountry = mongoose.model('LovedCountry', lovedCountrySchema);
+const LovedCountry = mongoose.model('Loved_Country', lovedCountrySchema);
 
 module.exports = LovedCountry;

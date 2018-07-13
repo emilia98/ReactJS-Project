@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import MenuItem from '../subcomponents/MenuItem';
+import MenuItem from './MenuItem';
+
+import { Link } from 'react-router-dom';
 
 export default class MainMenu extends Component {
     constructor (props) {
@@ -38,8 +40,8 @@ export default class MainMenu extends Component {
             <MenuItem iconClass='fa-home' href='/' link='Home' openMenu={null} />
             <MenuItem iconClass='fa-globe' href='/explore' link='Explore' />
             <MenuItem iconClass='fa-search' href='/search' link='Search' />
-            <MenuItem iconClass='fa-compass' href='/activate/pro' link='Go Pro' itemClass='pro' />
-            <MenuItem iconClass='fa-user' href='#' link='User' itemId='user-info' openMenu={this.openMenu} />
+            {/*<MenuItem iconClass='fa-compass' href='/activate/pro' link='Go Pro' itemClass='pro' />*/}
+            <MenuItem iconClass='fa-user' href='' link='User' itemId='user-info' openMenu={this.openMenu} />
           </ul>
         </nav>
 
@@ -47,6 +49,7 @@ export default class MainMenu extends Component {
           <ul>
             <li>About the Project</li>
             <li>Blog</li>
+            
             {/* <li>FAQ</li> */}
             {/* <li>Pricing</li> */}
           </ul>

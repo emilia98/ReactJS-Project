@@ -5,37 +5,39 @@ const profileSchema = mongoose.Schema({
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
       default: null
     },
     userGoogleId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserGoogle',
-        required: true,
         default: null
     },
     userFacebookId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserFacebook',
-        required: true,
         default: null
     },
     firstName: {
-      type: String
+      type: String,
+      default: ''
     },
     lastName: {
-        type: String
+        type: String,
+        default: ''
     },
     birthdate: {
-        type: mongoose.Schema.Types.Date
+        type: mongoose.Schema.Types.Date,
+        default: null
     },
     Country: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Country'
+        ref: 'Country',
+        default: null
         // required: true
     },
     Town: {
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        default: null
         // required: true
     },
     isPro: {
@@ -45,7 +47,7 @@ const profileSchema = mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: ''
+        default: 'https://i.imgur.com/YKhObkG.jpg'
     },
     comments: [
         {
@@ -57,7 +59,11 @@ const profileSchema = mongoose.Schema({
         type: mongoose.Schema.Types.Date,
         default: Date.now()
     }
-})
+});
+
+const Profile = mongoose.model('UserProfile', profileSchema);
+
+module.exports = Profile;
 /*
 UserProfile (for user data)
  -> userId -> pointing to the User (ref="User")

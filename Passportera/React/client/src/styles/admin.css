@@ -300,3 +300,50 @@ div.error-important {
  
 }
 }
+
+#expolore-container {
+  width: 95%;
+  margin: 1% auto;
+}
+.page-title {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.explore h1 {
+  margin: 0;
+}
+
+.explore {
+  width: 49%;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+#explore-info {
+  width: 45%;
+  display: inline-block;
+}
+
+.explore.right {
+  text-align: right;
+}
+
+.explore select {
+  padding: 2%;
+  text-align: center;
+}
+
+#explore-info {
+  width: 100%;
+  padding: 1%;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.explore-results {
+  opacity: 0.5;
+}

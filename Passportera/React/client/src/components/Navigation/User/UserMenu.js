@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UnauthenticatedUser from './Unauthenticated';
+import LoggedIn from './LoggedIn';
 
 class UserMenu extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.renderContent = this.renderContent.bind(this);
-    // this.menuClicked = this.menuClicked.bind(this);
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
-    // this.googleLoginClicked = this.googleLoginClicked.bind(this);
 
-  
     this.buttonClicked = this.buttonClicked.bind(this);
 
     this.state = {
@@ -21,19 +19,19 @@ class UserMenu extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     document.addEventListener('click', this.handleClickOutside);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     document.removeEventListener('click', this.handleClickOutside);
   }
 
-  setWrapperRef(node) {
+  setWrapperRef (node) {
     this.wrapper = node;
   }
 
-  async buttonClicked(e) {
+  async buttonClicked (e) {
     let token = localStorage.getItem('token');
     let result = await fetch('http://localhost:8080/user/profile/me', {
       method: 'GET',
@@ -46,23 +44,7 @@ class UserMenu extends Component {
     result = await result.json();
   }
 
-  
-  /*
-  async googleLoginClicked(e) {
-    
-    e.preventDefault();
-    // console.log(e.target);
-    // window.open('http://localhost:8080/auth/google', '_blank');
-    
-    let result = await fetch('http://localhost:8080/auth/google', {
-    
-    });
-    
-     result = await result.json();
-  }
-*/
-
-  handleClickOutside(event) {
+  handleClickOutside (event) {
     if ((document.getElementById('user-info').contains(event.target)) ||
       (this.wrapper && this.wrapper.contains(event.target))) {
       this.setState({
@@ -85,29 +67,21 @@ class UserMenu extends Component {
         return;
       }
       default: {
-        return <p>USER</p>;
+        return <LoggedIn user={this.props.auth.user}/>;
       }
     }
    //console.log(this.props.auth);
   }
 
   render() {
-    // console.log('props');
-    // console.log(this.props.auth);
-   // console.log(this.props);
-    // if(this.props.auth);
-
-
     let classes = this.state.isOpened === true ? 'opened' : '';
     return (
       <nav id='user' ref={this.setWrapperRef} className={classes}>
         {
           this.renderContent()
         }
-
-        
       </nav>
-    )
+    );
   }
 }
 

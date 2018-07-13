@@ -23,6 +23,6 @@ const visitedCountriesSchema = mongoose.Schema({
   }]
 });
 
-const VisitedCountry = mongoose.model('VisitedCountry', visitedCountriesSchema);
+const VisitedCountry = mongoose.model('Visited_Country', visitedCountriesSchema);
 
 module.exports = VisitedCountry;

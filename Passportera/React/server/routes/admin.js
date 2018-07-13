@@ -1,6 +1,9 @@
 const isAdministarted = require('../middlewares/administration').isAdministrated;
 const router = require('express').Router();
 const Country = require('../models/Country');
+const VisitedCountry = require('../models/Country/VisitedCountry');
+const ToVisitCountry = require('../models/Country/ToVisitCountry');
+const LovedCountry = require('../models/Country/LovedCountry');
 // const CountryInfo = require('../models/CountryInfo');
 
 router.post('/manage/country/new', isAdministarted, async (req, res) => {
@@ -17,7 +20,6 @@ router.post('/manage/country/new', isAdministarted, async (req, res) => {
 
     let entriesWithIsoCode = await Country.findOne({isoCode: isoCode});
 
-    // console.log(entriesWithIsoCode);
     if(entriesWithIsoCode) {
         return res.json({
             exists: true
@@ -74,6 +76,25 @@ router.post('/manage/country/new', isAdministarted, async (req, res) => {
     }
 
     // console.log('here');
+    let visitedCountry = await VisitedCountry.create({
+        countryId: country._id
+    });
+    let toVisitCountry = await ToVisitCountry.create({
+        countryId: country._id
+    });
+    let lovedCountry = await LovedCountry.create({
+        countryId: country._id
+    });
+
+    await country.update({ $set:
+       {
+        visitedData: visitedCountry._id,
+        toVisitedData: toVisitCountry._id,
+        lovedData: lovedCountry._id
+       }
+     });
+
+
     res.status(200).json(null);
 });
 

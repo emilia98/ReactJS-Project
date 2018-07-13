@@ -1,11 +1,12 @@
 const User = require('../models/User');
-const Activator = require('../models/Activator');
-const sendEmail = require('../utilities/send_email_2');
-const encryption = require('../utilities/encryption');
-const voucherCodes = require('../utilities/voucher_codes');
-const shortid = require('short-id');
+const Profile = require('../models/Profile');
+// const Activator = require('../models/Activator');
+// const sendEmail = require('../utilities/send_email_2');
+ const encryption = require('../utilities/encryption');
+// const voucherCodes = require('../utilities/voucher_codes');
+// const shortid = require('short-id');
 // const passportTokens = require('passport-jwt');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 
 
 
@@ -50,8 +51,8 @@ module.exports.registerPost = async (req, res) => {
   });
 
   let newUser;
-  let activationLink = shortid.generate();
-  let activationCode = voucherCodes.generateForActivation();
+  // let activationLink = shortid.generate();
+  // let activationCode = voucherCodes.generateForActivation();
 
   try {
     newUser = await user.save();
@@ -70,6 +71,40 @@ module.exports.registerPost = async (req, res) => {
     return;
   }
 
+  console.log(user);
+
+  let profile;
+
+  try {
+    profile = await Profile.create({
+      userId: newUser._id
+    });
+    // sendEmail(); 
+  } catch (err) {
+    // let errors = [];
+
+    console.log(err);
+    
+    for (let error in err.errors) {
+      let errorField = err.errors[error].properties.path;
+      let errorMsg = err.errors[error].message;
+      result.errors[errorField] = errorMsg;
+      // console.log(err.errors[error].properties.path);
+      // errors.push(err.errors[error].message);
+    }
+    res.status(402).json(result);
+    return;
+  }
+
+  console.log(profile);
+
+  await newUser.update({ $set:
+    {
+     profileId: profile._id
+    }
+  });
+
+  /*
   let activator;
   // let modifiedCode = 
   
@@ -85,8 +120,8 @@ module.exports.registerPost = async (req, res) => {
     res.status(402).json({ server: 'Error while sending confirmation email. Contact us to solve this problem!'});
     return;
   }
-
-  sendEmail(email, activationLink, activationCode);
+*/
+  // sendEmail(email, activationLink, activationCode);
   // console.log(activator);
 
   //res.status(200).json('Successfully created a user!');
@@ -164,7 +199,7 @@ module.exports.loginPost = async (req, res) => {
       profilePicture: 'https://4.bp.blogspot.com/-L9CtV6gR8GI/WtgKA619aEI/AAAAAAAAF9c/CubtyZE94o076qCShJN_D2bdNiHoeIRxACEwYBhgL/s1600/cool%2Bprofile%2Bimages.png'
     };
     const token = jwt.sign(userData, 'my_react_app', {
-      expiresIn: '30d'
+      expiresIn: '3d'
     });
     console.log(token);
 

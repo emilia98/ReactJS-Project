@@ -1,12 +1,22 @@
 let router = require('express').Router();
 const passport = require('passport');
 const isAuthenticated = require('../middlewares/authentication').isAuthenticated;
+const Profile = require('../models/Profile');
 
 router.get('/here',  (req, res) => 
-    passport.authenticate('jwt', {session: false}, (err, user, info) => {
-        //console.log(user);
+    passport.authenticate('jwt', {session: false}, async (err, user, info) => {
+        
+        // console.log(user);
         if (user) {
-          return res.json({user: user._id});
+          let userPofile = await Profile.findById(user.profileId);
+          // console.log(userPofile);  
+          // console.log('Profile');
+          let dataToSend = {
+              //user: user._id,
+              username: user.username,
+              profilePicture: userPofile.profilePicture
+          };
+          return res.json({user: dataToSend});
         } 
 
         return res.json(false);
@@ -16,11 +26,9 @@ router.get('/here',  (req, res) =>
 router.get('/roles', (req, res) => {
     
     passport.authenticate('jwt', {session: false}, (err, user, info) => {
-        // console.log(user);
         if (user) {
           return res.json({isAdmin: user.role === 'Admin'});
         } 
-
         return res.json(false);
     })(req, res)
     
@@ -29,10 +37,6 @@ router.get('/roles', (req, res) => {
 });
 
 router.get('/profile/me', isAuthenticated, (req, res) => {
-    //console.log(req.url);
-    // console.log(req.user);
-    // console.log(req.isAuthenticated());
-    // console.log(res.locals);
     let userData = res.locals.user;
 
     console.log(userData);
@@ -40,5 +44,12 @@ router.get('/profile/me', isAuthenticated, (req, res) => {
         isAuth: req.isAuthenticated()
     });
 });
+
+router.get('/logout', isAuthenticated, (req, res) => {
+    res.status(200).json({
+        isOk: true
+    });
+});
+
 
 module.exports = router;

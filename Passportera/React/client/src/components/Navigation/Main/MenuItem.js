@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class MenuItem extends Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class MenuItem extends Component {
 
   iconClicked (e) {
     if (this.props.openMenu) {
-      this.props.openMenu();
+      return this.props.openMenu();
     }
   }
 
@@ -17,14 +18,17 @@ class MenuItem extends Component {
     let classNames = `fa fa-2x ${this.props.iconClass}`;
     let itemClass = this.props.itemClass !== undefined ? this.props.itemClass : '';
     let itemId = this.props.itemId !== undefined ? this.props.itemId : '';
+    let href = this.props.href !== '' ? this.props.href : '#';
 
     return (
-      <li id={itemId} className={itemClass} onClick={this.iconClicked}>
-        <i className={classNames} aria-hidden='true'></i>
-        <p>
-          <a href={this.props.href}>{this.props.link}</a>
-        </p>
-      </li>
+      <Link to={href}>
+        <li id={itemId} className={itemClass + ' clickable'} onClick={this.iconClicked}>
+          <i className={classNames} aria-hidden='true' />
+          <p>
+            {this.props.link}
+          </p>
+        </li>
+      </Link>
     );
   }
 }

@@ -30,7 +30,7 @@ export const administrate = () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
-        // console.log(response);
+      // console.log(response.data);
 
         dispatch({type: ADMINISTRATE, payload: response.data});
     }

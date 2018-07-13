@@ -37,12 +37,17 @@ class Register extends Component {
             body: data
         });
 
+       if(result.status === 200) {
+           window.location.href = '/login';
+           return;
+       }
        result = await result.json();
 
        this.setState({
            result: result,
            errors: result.errors
        });
+
 
        // console.log(this.state);
     };

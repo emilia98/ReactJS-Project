@@ -26,7 +26,22 @@ const countrySchema = mongoose.Schema({
         type: Number,
         default: 0,
         validate: validations.longitude
-    }
+    },
+    visitedData: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Visited_Country',
+        default: null
+    },
+    toVisitedData: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'ToVisit_Country',
+        default: null
+    },
+    lovedData: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Loved_Country',
+        default: null
+    },
 });
 
 let Country = mongoose.model('Country', countrySchema);

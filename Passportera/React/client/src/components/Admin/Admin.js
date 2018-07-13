@@ -9,7 +9,7 @@ class Admin extends Component {
             <div id="admin-container">
                 <Menu />
                 
-                <Route path='/admin/manage/country' exact component={CreateNewCountry}/>
+                <CreateNewCountry />
                 
             </div>
         )

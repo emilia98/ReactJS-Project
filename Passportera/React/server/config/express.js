@@ -49,6 +49,7 @@ module.exports = (app, config) => {
   const user = require('../routes/user');
   const visited = require('../controllers/user/visited');
   const admin = require('../routes/admin');
+  const explore = require('../routes/explore');
   const authMiddleware = require('../middlewares/authentication');
 
 
@@ -57,7 +58,7 @@ module.exports = (app, config) => {
   app.use('/visited', authMiddleware.isAuthenticated, visited);
   app.use('/admin', admin);
  
-  
+  app.use('/explore', explore);
 
   app.get('/logout', function (req, res){
     req.session.destroy(function (err) {

@@ -23,6 +23,6 @@ const toVisitCountrySchema = mongoose.Schema({
   }]
 });
 
-const ToVisitCountry = mongoose.model('ToVisitCountry', toVisitCountrySchema);
+const ToVisitCountry = mongoose.model('ToVisit_Country', toVisitCountrySchema);
 
 module.exports = ToVisitCountry;

@@ -397,14 +397,14 @@ h1 {
 }
 
 
-#profile {
+#personal-profile {
     text-align: center;
     display: inline-block !important;
     margin-bottom: 5%;
 }
 
 
-#profile img{
+#personal-profile img{
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -508,4 +508,8 @@ nav.responsive {
   display: inline-block;
   vertical-align: middle;
   padding: 1%;
+}
+
+.clickable {
+    cursor: pointer;
 }
